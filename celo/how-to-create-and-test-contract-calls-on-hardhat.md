@@ -37,20 +37,27 @@ To make transaction on the Alfajores TestNet you need fuacets in Celo USD ***CUS
 Hardhat is an Ethereum development environment that runs on `ether-js` and `solc-js`. It is used when to compiling, running and deploying solidity smart contracts
 
 ## Contract calls
-What are the contract calls refered to in this tutorial?
-The contract calls are basically the functions on the contract you will be deploying.
-They can either be functions on queries that caan be called from your deployed contract on the blockchain
+What are the contract calls reffered to in this tutorial?
+Making a contract call simply means calling the functions from a deployed contract into another deployed contract on the blockchain.
+The call can either be a function on query to from one deployed contract to another, to call a function or make a query some information from the second contract
 
-Now that you've been reminded on the tools well n=be needing, uts time to get your hands sirty with writing code to understanding the purpose of this tutorial.
+Now that you've been reminded on the tools we'll be needing, its time to get your hands dirty with writing code to understanding the purpose of this tutorial.
 
 ## Installing Hardhat
 In order to get started with the coding part o this tutorial, you need to install Hardhat.
 In the next couple of steps you will learn how to install Hardhat into you local work environment using yarn on you're prefered Package Manager  
 
 1.- Create a work space in you're prefered code editor.
-2.- Go to the your terminal of your work environment and run the code `hardhat run`  
+2.- Go to the your terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
+3.- Next run the command `npx hardhat` to fire up your hardhat development evnironment.
+You will be promt to choose the language you'll be working with.
+4.- Click enter twice to enable the option `Create a Javascript Project`. and to verify the project location.
+You will notice a new folder structure on your code editor file explorer. 
 
-## Creating your Smart Contract
+
+
+
+## Creating your Smart Contracts
 
 
 ## Deploying on celo Alfajores
