@@ -4,7 +4,7 @@
 
 Over the course of this tutorial you will learn how to:
 
-* Install Hardhat
+* Install and Setup Hardhat
 * Create a dummy smart contract
 * Use hardhat to deploy to the Celo Alfajores Network  
 * Create a proicient test script on hardhat  
@@ -29,7 +29,7 @@ deployments and testing of smart contracts on a fake blockchain. Alghough it is 
 It functions exaclty as effective as on the Celo mainnets, except you call transactions using faucet funcdings (fake money).
 
 ## Faucets
-Faucets are simply fake money funded into your wallet only for the purpose of interacting with a testNet.
+Faucets are simply fake money funded into your wallet only for the purpose of interacting with a testNet "fake Blockchain".
 To make transaction on the Alfajores TestNet you need fuacets in Celo USD ***CUSD***.
 
 
@@ -59,63 +59,92 @@ Now that you have sucessfully installed ane Setup your hardhat development envir
 
 ## Creating your Smart Contracts
 In order to simulate a contract call you will need to create two smart contracts. These two contracts will be deployed on the Celo Blockchain.
-One of the contract will have the functions you want to call `Introcudtion.sol`, while the other will be calling the functions from the first conrtact `Person.sol`.
+One of the contract will have the calling functions `TestContract.sol`, while the other contract `StudentIntro` will have the functions you will be calling from the previous contract `TestContract.sol`.
 
-The First contract `Introduction.sol` will have a simple function that accepts a student's information and returns an introduction of the person in a string format.
- Navigate to the contract folder in your work space and rename the existing contract to `Introduction.sol`.
+ Navigate to the contract folder in your work space and rename the existing contract to `StudentIntro.sol`, like in the image below.
+To initialize the contract and the needed variables, copy and paste the code below:
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
 
-Copy, and paste the code below into the `introduction.sol` file.
+contract StudentIntro {
+// Initializing the variables to Null or None
+        string name;
+        string university;
+        string course;
+        uint256 age;
+        bool has_payed;
+
+}
+```
+Inside the first contract `SudentIntro.sol` you will create will the following simple functions:
+* The first fucntion will be an external function `StudentInfo` that modifies the public variables `name`, `age`, `university`, and `course`. The Function will accept student's details as inputs and asign them to the oublic variables.
+Add the `studentDetail` function below, to the `StudentIntro.sol` contract created earlier.
+
+```solidity
+
+function studentDetails(
+        string memory _name, 
+        uint256 _age, 
+        string memory _uni, 
+        string memory _course
+        ) external {
+        string name = _name;
+        age = _age
+        university = _uni ;
+        course = _course;
+        }
+        
+```
+
+* The next function `Introduction` will also be an external function that simply returns a string format of the student's information stored in the `studentDetails` function. 
+Add the code below into the `StudentIntro.sol`file as the next function.
 
  ```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-// Import this file to use console.log
-
-contract Introduction {
-        
-        string name;
-        string university;
-        string course;
-        uint256 age;
-
-
-
-    function Introduce(
-        string memory _name, 
-        uint256 _age, 
-        string memory _uni, 
-        string memory _course
-        ) public returns(
+    function Introduce() external view returns(
+            string memory,
             string memory, 
-            string memory, 
-            uint256, 
+            uint256,
             string memory, 
             string memory) {
-                
-        name = _name;
-        university = _uni; 
-        course = _course; 
-        age = _age;
-
-
         return("Hi My Name is '%s' I am '%i'  years old and I am currently studying '%s' in the university of '%s' ", name, age, course, university);
     }
-
 }
+```
+* The next function will be a payable function will be an external payable function for a student to make ee payment, and also asign the bool variable `is_payed` to  `true`.
 
-
+```solidity
+function payFee(uint _amount) external payable {
+    amount = _amount
+    value = msg.value
+    is_payed = True
+}
 ```
 
-For the second contract, it will have a simple function that tkes in a string input `_gender` s returns a string format.
+The second contract being the caller function `TestContract.sol` will be the testing contract that will call the function from tthe `StudentIntro.sol` contract.
+The contract will have four different functions to call the four different functions from the first contract `StudentIntro.sol`.
+
+* The first calling function will be calling a simple return function.  
+
 This Gender.sol contract will be making a contract call to the `introduction.sol` contract    
 This contract will also have call the function `introducing` from the `introduction.sol` contract.
 ```solidity
-
-
+function getPayInfo() external view returns (string, bool, uint) {
+    return (name, bool, value)
+}
 ```
 
-## Deploying on Celo Alfajores
+After adding aall the functions created above, your complete `StudentIntro.sol` contract should look exactly like the code below.
+
+For Uniformity purposes copy and paste the entire code below into the `StudentIntro.sol` contract file
+
+
+## Deploying to Celo Alfajores
+Hopeully you should be familiar with deploying a contract on the Celo blockchian. If not Here is a quick quide on how to deploy to the Celo Blockchain.
+In the next few steps you will deploy both of the previously created contracts to the celo blockchian, to begin making the contract calls.
 
 
 ## Creating a proficient test script
