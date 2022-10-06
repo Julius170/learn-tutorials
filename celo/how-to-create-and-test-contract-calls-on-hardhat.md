@@ -1,72 +1,72 @@
 # How to Create and test contract calls on HardHat 
 
 # Introduction
-One of the most essential and helpful tool a blockchain developer has as an arsenal is making contracts calls. When working on complex and multi-contract project it is very likely, that you wont be deploying a single smart contrcat file for the whole production. You might even deploy some  contracts earlier that others.
+One of the most essential and helpful tools a blockchain developer has as an arsenal is making contract calls. When working on complex and multi-contract projects it is very likely, that you won't be deploying a single smart contract file for the whole production. You might even deploy some contracts earlier than others.
 Making contract calls is a very flexible way to enable a contract to interact with other deployed contracts on the blockchain.
-This way rather that having a messy long line of code, 
+This way rather than having a messy long line of code, 
 
-Over the course of this tutorial you will learn how to:
+Throughout this tutorial you will learn how to:
 
 * Install and Setup Hardhat
 * Create a dummy smart contract
 * Use hardhat to deploy to the Celo Alfajores Network  
-* Create a proicient test script on hardhat  
+* Create a proficient test script on a hardhat  
 * And make contract calls on your deployed contract using hardhat test scripts
 
 
 # Prerequisites
-To get the best of this tutorial, you should have a basic  and foundational understanding of the following:
+To get the best out of this tutorial, you should have a basic  and foundational understanding of the following:
 * Celo Alfajores testNet
 * Faucets 
-* Hardhat, Don't worry, you will be installing hardhat along side this tutorial 
-* Node `node` and Package Manager `yarn` or `npm`. You should have `node` and you're prefered package manager pre-installed.
-This tutorial will make use of the `yarn` package manager, but you can follow along you're prefered PM
+* Hardhat, Don't worry, you will be installing hardhat alongside this tutorial 
+* Node `node` and Package Manager `yarn` or `npm`. You should have `node` and you're preferred package manager pre-installed.
+This tutorial will make use of the `yarn` package manager, but you can follow along with you're preferred PM
 
 
-## Brief defination on Keywords
-Before you getting started with this tutoral, here is a quick recap on the keywords you'll be working with along this tutorial
+## Brief definition of Keywords
+Before you get started with this tutorial, here is a quick recap of the keywords you'll be working with during this tutorial
 
 ## Celo Alfajores
-The celo Alfajores is a test network run by the Celo Team. It a blockchain simulation that enables
-deployments and testing of smart contracts on a fake blockchain. Alghough it is regarded a fake blockchain, primarily to simulate deploying and testing contracts on the Celo Blockchain
-It functions exaclty as effective as on the Celo mainnets, except you call transactions using faucet funcdings (fake money).
+The celo Alfajores is a test network run by the Celo Team. It is a blockchain simulation that enables
+deployments and testing of smart contracts on a fake blockchain. Although it is regarded as a fake blockchain, it primarily simulates deploying and testing contracts on the Celo Blockchain
+It functions exactly as effectively as on the Celo mainnets, except you call transactions using faucet funding (fake money).
 
 ## Faucets
-Faucets are simply fake money funded into your wallet only for the purpose of interacting with a testNet "fake Blockchain".
-To make transaction on the Alfajores TestNet you need fuacets in Celo USD **CUSD**.
-Following this tutorial you will need **CUSD** faucets to deploy and make transaction on the celo Alfajores blockchian   
+Faucets are simply fake money funded into your wallet only to interact with a testNet "fake Blockchain".
+To make transactions on the Alfajores TestNet you need faucets in Celo USD **CUSD**.
+Following this tutorial, you will need **CUSD** faucets to deploy and make transactions on the celo Alfajores blockchain   
 
 
 ## HardHat
-Hardhat is an Ethereum development environment that runs on `ether-js` and `solc-js`. It is used when to compiling, running and deploying solidity smart contracts
+Hardhat is an Ethereum development environment that runs on `ether-js` and `solc-js`. It is used when compiling, running, and deploying solidity smart contracts
 
 ## Contract calls
-What are the contract calls reffered to in this tutorial?
+What are the contract calls referred to in this tutorial?
 Making a contract call simply means calling the functions from a deployed contract into another deployed contract on the blockchain.
-The call can either be a function on query to from one deployed contract to another, to call a function or make a query some information from the second contract
+The call can either be a function on the query from one deployed contract to another, to call a function, or make a query for some information from the second contract
 
-Now that you've been reminded on the tools we'll be needing, its time to get your hands dirty with writing code to understanding the purpose of this tutorial.
+Now that you've been reminded of the tools we'll be needing, it's time to get your hands dirty with writing code to understand the purpose of this tutorial.
 
 ## Installing Hardhat
-In order to get started with the coding part o this tutorial, you need to install Hardhat.
-In the next couple of steps you will learn how to install Hardhat into you local work environment using yarn on you're prefered Package Manager  
+To get started with the coding part o this tutorial, you need to install Hardhat.
+In the next couple of steps, you will learn how to install Hardhat into your local work environment using yarn on you're preferred Package Manager  
 
-1.- Create a work space in you're prefered code editor.
-2.- Go to the your terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
-3.- Next run the command `npx hardhat` to fire up your hardhat development evnironment.
-You will be promt to choose the language you'll be working with.
+1.- Create a workspace in you're preferred code editor.
+2.- Go to the terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
+3.- Next run the command `npx hardhat` to fire up your hardhat development environment.
+You will be prompted to choose the language you'll be working with.
 4.- Click enter twice to enable the option `Create a Javascript Project`. and to verify the project location.
 You will notice a new folder structure on your code editor file explorer. 
 
-Now that you have sucessfully installed ane Setup your hardhat development environment. next you will create the examplary contracts you need to test the contract calls  
+Now that you have successfully installed and Setup up your hardhat development environment. next you will create the exemplary contracts you need to test the contract calls  
 
 
 ## Creating your Smart Contracts
-In order to simulate a contract call you will need to create two smart contracts. These two contracts will be deployed on the Celo Blockchain.
-One of the contract will have the calling functions `TestContract.sol`, while the other contract `StudentIntro` will have the functions you will be calling from the previous contract `TestContract.sol`.
+To simulate a contract call, you will need to create two smart contracts. These two contracts will be deployed on the Celo Blockchain.
+One of the contracts will have the calling functions `TestContract.sol`, while the other contract `StudentIntro.sol` will have the functions you will be calling from the previous contract `TestContract.sol`.
 
 ### The Calling Contract ***StudentIntro***:
-Navigate to the contract folder in your work space and rename the existing contract to `StudentIntro.sol`, like in the image below.
+Navigate to the contract folder in your workspace and rename the existing contract to `StudentIntro.sol`, like in the image below.
 To initialize the contract and the needed variables, copy and paste the code below:
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -83,7 +83,7 @@ contract StudentIntro {
 }
 ```
 Inside the first contract `SudentIntro.sol` you will create will the following simple functions:
-* The first fucntion will be an external function `StudentInfo` that modifies the public variables `name`, `age`, `university`, and `course`. The Function will accept student's details as inputs and asign them to the oublic variables.
+* The first function will be an external function `StudentInfo` that modifies the public variables `name`, `age`, `university`, and `course`. The Function will accept students' details as inputs and assign them to the public variables.
 Add the `studentDetail` function below, to the `StudentIntro.sol` contract created earlier.
 
 ```solidity
@@ -103,7 +103,7 @@ function studentDetails(
 ```
 
 * The next function `Introduction` will also be an external function that simply returns a string format of the student's information stored in the `studentDetails` function. 
-Add the code below into the `StudentIntro.sol`file as the next function.
+Add the code below into the `StudentIntro.sol` file as the next function.
 
  ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -120,7 +120,7 @@ pragma solidity ^0.8.9;
 }
 ```
 
-* The last function `payFee` will be an external payable function for that transfers money into the contract to simulate a student making payment, the function asigns the bool variable `is_payed` to `true` and the vaireable payed amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
+* The last function `payFee` will be an external payable function that transfers money into the contract to simulate a student making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
 
 Copy and add the code below to the `StudentIntro.sol` contract.
 
@@ -132,16 +132,16 @@ function payFee(uint _amount) external payable returns(string uint256, bool) {
     return ("'%b' : '%i' was payed by '%s'", is_payed, name, value)
 }
 ```
-The three function created are sample function to copy a real scenerio of calling different types of functions from a contract  
+The three functions created are sample functions to copy a real scenario of calling different types of functions from a contract  
 Note: ***Alternatively, When creating contract calls you can also use the keyword `Interface` to initialize the calling contract. To know more about the interface Keyword and other Basic Solidity Data Types click here***. 
 
 
 ### The Caller Contract ***TestContract.sol***:
 
-The second contract being the caller function `TestContract.sol` will be the testing contract that will make the contract calls to the  `StudentIntro.sol` contract.
+The second contract is the caller function `TestContract.sol` will be the testing contract that will make the contract calls to the  `StudentIntro.sol` contract.
 The contract will also have three different functions to call the three different functions from the first contract `StudentIntro.sol`.
 
-Note: ***When cdereating a contract calling function the first inpu t in the function will be the deployed contract address of the calling contract. followed by the name of the function in the contractg you wanr to call***.  
+Note: ***When creating a contract calling function the first input in the function will be the deployed contract address of the calling contract. followed by the name of the function in the contract you want to call***.  
 * The first function will be calling call the function `Studentdetails` from the `StudentIntro` contract.  
 
 ```solidity
@@ -150,14 +150,14 @@ function callStudentIntro(address contractAddress) {
 }
 ```
 
-After adding aall the functions created above, your complete `StudentIntro.sol` contract should look exactly like the code below.
+After adding all the functions created above, your complete `StudentIntro.sol` contract should look exactly like the code below.
 
-For Uniformity purposes copy and paste the entire code below into the `StudentIntro.sol` contract file
+For Uniformity, purposes copy and paste the entire code below into the `StudentIntro.sol` contract file
 
 
 ## Deploying to Celo Alfajores
-Hopeully you should be familiar with deploying a contract on the Celo blockchian. If not Here is a quick quide on how to deploy to the Celo Blockchain.
-In the next few steps you will deploy both of the previously created contracts to the celo blockchian, to begin making the contract calls.
+Hopefully, you should be familiar with deploying a contract on the Celo blockchain. If not Here is a quick guide on how to deploy to the Celo Blockchain.
+In the next few steps, you will deploy both of the previously created contracts to the Celo blockchain, to begin making the contract calls.
 
 
 ## Creating a proficient test script
