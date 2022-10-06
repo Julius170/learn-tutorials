@@ -33,7 +33,8 @@ It functions exaclty as effective as on the Celo mainnets, except you call trans
 
 ## Faucets
 Faucets are simply fake money funded into your wallet only for the purpose of interacting with a testNet "fake Blockchain".
-To make transaction on the Alfajores TestNet you need fuacets in Celo USD ***CUSD***.
+To make transaction on the Alfajores TestNet you need fuacets in Celo USD **CUSD**.
+Following this tutorial you will need **CUSD** faucets to deploy and make transaction on the celo Alfajores blockchian   
 
 
 ## HardHat
@@ -64,7 +65,8 @@ Now that you have sucessfully installed ane Setup your hardhat development envir
 In order to simulate a contract call you will need to create two smart contracts. These two contracts will be deployed on the Celo Blockchain.
 One of the contract will have the calling functions `TestContract.sol`, while the other contract `StudentIntro` will have the functions you will be calling from the previous contract `TestContract.sol`.
 
- Navigate to the contract folder in your work space and rename the existing contract to `StudentIntro.sol`, like in the image below.
+### The Calling Contract ***StudentIntro***:
+Navigate to the contract folder in your work space and rename the existing contract to `StudentIntro.sol`, like in the image below.
 To initialize the contract and the needed variables, copy and paste the code below:
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -117,25 +119,33 @@ pragma solidity ^0.8.9;
     }
 }
 ```
-* The next function will be a payable function will be an external payable function for a student to make ee payment, and also asign the bool variable `is_payed` to  `true`.
+
+* The last function `payFee` will be an external payable function for that transfers money into the contract to simulate a student making payment, the function asigns the bool variable `is_payed` to `true` and the vaireable payed amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
+
+Copy and add the code below to the `StudentIntro.sol` contract.
 
 ```solidity
-function payFee(uint _amount) external payable {
-    amount = _amount
-    value = msg.value
+function payFee(uint _amount) external payable returns(string uint256, bool) {
+    msg.sender(amount)
+    amount = msg.value
     is_payed = True
+    return ("'%b' : '%i' was payed by '%s'", is_payed, name, value)
 }
 ```
+The three function created are sample function to copy a real scenerio of calling different types of functions from a contract  
+Note: ***Alternatively, When creating contract calls you can also use the keyword `Interface` to initialize the calling contract. To know more about the interface Keyword and other Basic Solidity Data Types click here***. 
 
-The second contract being the caller function `TestContract.sol` will be the testing contract that will call the function from tthe `StudentIntro.sol` contract.
-The contract will have four different functions to call the four different functions from the first contract `StudentIntro.sol`.
 
-* The first calling function will be calling a simple return function.  
+### The Caller Contract ***TestContract.sol***:
 
-This Gender.sol contract will be making a contract call to the `introduction.sol` contract    
-This contract will also have call the function `introducing` from the `introduction.sol` contract.
+The second contract being the caller function `TestContract.sol` will be the testing contract that will make the contract calls to the  `StudentIntro.sol` contract.
+The contract will also have three different functions to call the three different functions from the first contract `StudentIntro.sol`.
+
+Note: ***When cdereating a contract calling function the first inpu t in the function will be the deployed contract address of the calling contract. followed by the name of the function in the contractg you wanr to call***.  
+* The first function will be calling call the function `Studentdetails` from the `StudentIntro` contract.  
+
 ```solidity
-function getPayInfo() external view returns (string, bool, uint) {
+function callStudentIntro(address contractAddress) {
     return (name, bool, value)
 }
 ```
