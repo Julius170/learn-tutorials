@@ -1,6 +1,9 @@
 # How to Create and test contract calls on HardHat 
 
 # Introduction
+One of the most essential and helpful tool a blockchain developer has as an arsenal is making contracts calls. When working on complex and multi-contract project it is very likely, that you wont be deploying a single smart contrcat file for the whole production. You might even deploy some  contracts earlier that others.
+Making contract calls is a very flexible way to enable a contract to interact with other deployed contracts on the blockchain.
+This way rather that having a messy long line of code, 
 
 Over the course of this tutorial you will learn how to:
 
