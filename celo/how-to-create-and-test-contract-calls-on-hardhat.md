@@ -54,13 +54,68 @@ You will be promt to choose the language you'll be working with.
 4.- Click enter twice to enable the option `Create a Javascript Project`. and to verify the project location.
 You will notice a new folder structure on your code editor file explorer. 
 
-
+Now that you have sucessfully installed ane Setup your hardhat development environment. next you will create the examplary contracts you need to test the contract calls  
 
 
 ## Creating your Smart Contracts
+In order to simulate a contract call you will need to create two smart contracts. These two contracts will be deployed on the Celo Blockchain.
+One of the contract will have the functions you want to call `Introcudtion.sol`, while the other will be calling the functions from the first conrtact `Person.sol`.
+
+The First contract `Introduction.sol` will have a simple function that accepts a student's information and returns an introduction of the person in a string format.
+ Navigate to the contract folder in your work space and rename the existing contract to `Introduction.sol`.
+
+Copy, and paste the code below into the `introduction.sol` file.
+
+ ```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.9;
+
+// Import this file to use console.log
+
+contract Introduction {
+        
+        string name;
+        string university;
+        string course;
+        uint256 age;
 
 
-## Deploying on celo Alfajores
+
+    function Introduce(
+        string memory _name, 
+        uint256 _age, 
+        string memory _uni, 
+        string memory _course
+        ) public returns(
+            string memory, 
+            string memory, 
+            uint256, 
+            string memory, 
+            string memory) {
+                
+        name = _name;
+        university = _uni; 
+        course = _course; 
+        age = _age;
+
+
+        return("Hi My Name is '%s' I am '%i'  years old and I am currently studying '%s' in the university of '%s' ", name, age, course, university);
+    }
+
+}
+
+
+```
+
+For the second contract, it will have a simple function that tkes in a string input `_gender` s returns a string format.
+This Gender.sol contract will be making a contract call to the `introduction.sol` contract    
+This contract will also have call the function `introducing` from the `introduction.sol` contract.
+```solidity
+
+
+```
+
+## Deploying on Celo Alfajores
 
 
 ## Creating a proficient test script
