@@ -2,8 +2,10 @@
 
 # Introduction
 One of the most essential and helpful tools a blockchain developer has as an arsenal is making contract calls. When working on complex and multi-contract projects it is very likely, that you won't be deploying a single smart contract file for the whole production. You might even deploy some contracts earlier than others.
-Making contract calls is a very flexible way to enable a contract to interact with other deployed contracts on the blockchain.
-This way rather than having a messy long line of code, 
+
+Making contract calls is a flexible way for deployed contracts to interact with other deployed contracts on the blockchain.
+This way rather than having a messy long line of code, you have a network of contracts interacting with each other on the blockchian.
+
 
 Throughout this tutorial you will learn how to:
 
@@ -19,8 +21,9 @@ To get the best out of this tutorial, you should have a basic  and foundational 
 * Celo Alfajores testNet
 * Faucets 
 * Hardhat, Don't worry, you will be installing hardhat alongside this tutorial 
-* Node `node` and Package Manager `yarn` or `npm`. You should have `node` and you're preferred package manager pre-installed.
-This tutorial will make use of the `yarn` package manager, but you can follow along with you're preferred PM
+* Node `node` and Node Package Manager `npm`. This tutorial will make use of the node package manager.
+You should have the node package manager `npm` pre-installed. Follow the links more information on installing `node` and node package manager `npm`.
+
 
 
 ## Brief definition of Keywords
@@ -32,18 +35,20 @@ deployments and testing of smart contracts on a fake blockchain. Although it is 
 It functions exactly as effectively as on the Celo mainnets, except you call transactions using faucet funding (fake money).
 
 ## Faucets
-Faucets are simply fake money funded into your wallet only to interact with a testNet "fake Blockchain".
+Faucets are simply fake money funded into your wallet only to interact with a testNet **fake Blockchain**.
 To make transactions on the Alfajores TestNet you need faucets in Celo USD **CUSD**.
 Following this tutorial, you will need **CUSD** faucets to deploy and make transactions on the celo Alfajores blockchain   
 
 
 ## HardHat
-Hardhat is an Ethereum development environment that runs on `ether-js` and `solc-js`. It is used when compiling, running, and deploying solidity smart contracts
+Hardhat is an Ethereum Development Environment that runs on `ether-js` and `solc-js`. It is used for compiling, running, and deploying solidity smart contracts
 
-## Contract calls
+
+## Calling Contracts 
 What are the contract calls referred to in this tutorial?
 Making a contract call simply means calling the functions from a deployed contract into another deployed contract on the blockchain.
-The call can either be a function on the query from one deployed contract to another, to call a function, or make a query for some information from the second contract
+The calls can be made to retireve data from a query function , or to a payable function for making payment, or even a modifier function for modifying a variable state
+
 
 Now that you've been reminded of the tools we'll be needing, it's time to get your hands dirty with writing code to understand the purpose of this tutorial.
 
@@ -51,11 +56,15 @@ Now that you've been reminded of the tools we'll be needing, it's time to get yo
 To get started with the coding part o this tutorial, you need to install Hardhat.
 In the next couple of steps, you will learn how to install Hardhat into your local work environment using yarn on you're preferred Package Manager  
 
-1.- Create a workspace in you're preferred code editor.
-2.- Go to the terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
-3.- Next run the command `npx hardhat` to fire up your hardhat development environment.
-You will be prompted to choose the language you'll be working with.
-4.- Click enter twice to enable the option `Create a Javascript Project`. and to verify the project location.
+1. Create a workspace in you're preferred code editor.
+
+2. Go to the terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
+
+3. Run the command  `npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers` on your terminal to install all the required dependencies you'lll need for this tutorial
+
+4. Next run the command `npx hardhat` to fire up your hardhat development environment. You will be prompted to choose the language you'll be working with.
+
+5. Click enter twice to enable the option `Create a Javascript Project`. and to verify the project location.
 You will notice a new folder structure on your code editor file explorer. 
 
 Now that you have successfully installed and Setup up your hardhat development environment. next you will create the exemplary contracts you need to test the contract calls  
