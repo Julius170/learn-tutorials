@@ -77,18 +77,20 @@ One of the contracts will have the calling functions `TestContract.sol`, while t
 ### The Calling Contract ***StudentIntro***:
 Navigate to the contract folder in your workspace and rename the existing contract to `StudentIntro.sol`, like in the image below.
 To initialize the contract and the needed variables, copy and paste the code below:
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
 contract StudentIntro {
-// Initializing the variables to Null or None
-        string name;
-        string university;
-        string course;
-        uint256 age;
-        bool has_payed;
 
+// Initializing the variables to Null or None
+    string name;
+    string university;
+    string course;
+    uint256 age;
+    bool has_payed;
+    
 }
 ```
 Inside the first contract `SudentIntro.sol` you will create will the following simple functions:
@@ -97,17 +99,12 @@ Add the `studentDetail` function below, to the `StudentIntro.sol` contract creat
 
 ```solidity
 
-function studentDetails(
-        string memory _name, 
-        uint256 _age, 
-        string memory _uni, 
-        string memory _course
-        ) external {
-        string name = _name;
-        age = _age
-        university = _uni ;
+    function studentDetails(string memory _name, uint256 _age, string memory _uni, string memory _course) external {
+        name = _name;
+        age = _age;
+        university = _uni;
         course = _course;
-        }
+    }
         
 ```
 
@@ -115,18 +112,16 @@ function studentDetails(
 Add the code below into the `StudentIntro.sol` file as the next function.
 
  ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.9;
-
-    function Introduce() external view returns(
-            string memory,
-            string memory, 
-            uint256,
-            string memory, 
-            string memory) {
+   function Introduce() external view returns(
+        string memory,
+        string memory, 
+        uint256,
+        string memory, 
+        string memory) {
+        
         return("Hi My Name is '%s' I am '%i'  years old and I am currently studying '%s' in the university of '%s' ", name, age, course, university);
     }
-}
+
 ```
 
 * The last function `payFee` will be an external payable function that transfers money into the contract to simulate a student making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
@@ -134,12 +129,12 @@ pragma solidity ^0.8.9;
 Copy and add the code below to the `StudentIntro.sol` contract.
 
 ```solidity
-function payFee(uint _amount) external payable returns(string uint256, bool) {
-    msg.sender(amount)
-    amount = msg.value
-    is_payed = True
-    return ("'%b' : '%i' was payed by '%s'", is_payed, name, value)
-}
+    function payFee() external payable returns(string memory, bool, string memory, uint256) {
+        uint256 value = msg.value;
+        has_payed = true;
+
+        return ("'%b' : '%i' was payed by '%s'", has_payed, name, value);
+        }
 ```
 The three functions created are sample functions to copy a real scenario of calling different types of functions from a contract  
 Note: ***Alternatively, When creating contract calls you can also use the keyword `Interface` to initialize the calling contract. To know more about the interface Keyword and other Basic Solidity Data Types click here***. 
