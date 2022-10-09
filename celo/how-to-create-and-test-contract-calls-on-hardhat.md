@@ -72,54 +72,46 @@ Now that you have successfully installed and Setup up your hardhat development e
 
 ## Creating your Smart Contracts
 To simulate a contract call, you will need to create two smart contracts. These two contracts will be deployed on the Celo Blockchain.
-One of the contracts will have the calling functions `TestContract.sol`, while the other contract `StudentIntro.sol` will have the functions you will be calling from the previous contract `TestContract.sol`.
+One of the contracts will have the calling functions `TestContract.sol`, while the other contract `Person.sol` will have the functions you will be calling from the previous contract `TestContract.sol`.
 
-### The Calling Contract ***StudentIntro***:
-Navigate to the contract folder in your workspace and rename the existing contract to `StudentIntro.sol`, like in the image below.
+### The Calling Contract **`Person`**:
+Navigate to the contract folder in your workspace and rename the existing contract from `Lock.sol` to `Person.sol`.
+
 To initialize the contract and the needed variables, copy and paste the code below:
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract StudentIntro {
+contract Person {
 
 // Initializing the variables to Null or None
     string name;
-    string university;
-    string course;
     uint256 age;
     bool has_payed;
     
 }
 ```
-Inside the first contract `SudentIntro.sol` you will create will the following simple functions:
-* The first function will be an external function `StudentInfo` that modifies the public variables `name`, `age`, `university`, and `course`. The Function will accept students' details as inputs and assign them to the public variables.
-Add the `studentDetail` function below, to the `StudentIntro.sol` contract created earlier.
+Inside the contract `Person.sol` you will create will the following simple functions:
+* The first function will be an external function `getDetails` that modifies the public variables `name`, and `age`. The function will accept a person's details as inputs and assign them to the public variables.
+Add the `getDetails` function to the `Person.sol` contract created earlier.
 
 ```solidity
 
-    function studentDetails(string memory _name, uint256 _age, string memory _uni, string memory _course) external {
+    function getDetails(string memory _name, uint256 _age) external {
         name = _name;
         age = _age;
-        university = _uni;
-        course = _course;
     }
         
 ```
 
-* The next function `Introduction` will also be an external function that simply returns a string format of the student's information stored in the `studentDetails` function. 
-Add the code below into the `StudentIntro.sol` file as the next function.
+* The next function `sayDetails` will also be an external view function that simply returns the most recent pereson's details stored in the `getDetails` function.
+ 
+Copy and add the code below into the `Person.sol` Contract as the next function.
 
  ```solidity
-   function Introduce() external view returns(
-        string memory,
-        string memory, 
-        uint256,
-        string memory, 
-        string memory) {
-        
-        return("Hi My Name is '%s' I am '%i'  years old and I am currently studying '%s' in the university of '%s' ", name, age, course, university);
+   function sayDetails() external view returns (string memory, uint256) {
+        return (name, age);
     }
 
 ```
