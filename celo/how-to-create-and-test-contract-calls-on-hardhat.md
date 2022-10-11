@@ -281,7 +281,6 @@ pragma solidity ^0.8.10;
 
 
 import './Person.sol';
-import './PayingContract.sol';
 
 contract TestContract{
     function callGetDetails(address _test, string memory _name, uint256 _age) external {
