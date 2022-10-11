@@ -48,7 +48,7 @@ Getting faucets is always as easy as taking these few baby steps:
 
 
 ## HardHat
-Hardhat is an Ethereum Development Environment that runs on `ether-js` and `solc-js`. It is used for compiling, running, and deploying solidity smart contracts
+Hardhat is an Ethereum Development Environment that runs on `ether-js` and `solc-js` and other basic EVM compatible libraries. It is used for compiling, running, and deploying solidity smart contracts
 
 
 ## Calling Contracts 
@@ -152,6 +152,41 @@ The four functions created are sample functions to copy a real scenario of calli
 Note: ***Alternatively, When creating contract calls you can also use the keyword `Interface` to initialize the calling contract. To know more about the interface Keyword and other Basic Solidity Data Types click here***. 
 
 
+For Uniformity, purposes copy and paste the entire code below into the `Person.sol` contract file.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+contract Person {
+    string name;
+    uint256 age;
+    bool has_payed;
+    uint256 value;
+
+    function sayDetails() external view returns (string memory, uint256) {
+        return (name, age);
+    }
+
+    function getDetails(string memory _name, uint256 _age) external {
+        name = _name;
+        age = _age;
+    }
+    
+    function payFee() external payable {
+        value = msg.value;
+        has_payed = true;
+    }
+    
+    function getValue() external view returns(uint256, uint256, bool) {
+        return (value, address(this).balance, has_payed);
+    }
+
+}
+
+```
+
+
 ### The Caller Contract **`TestContract`**:
 
 The second contract `TestContract.sol` will be the testing contract that will make the contract calls to the `Person.sol` contract.
@@ -171,20 +206,21 @@ When you wnat to call contracts from other contracts, one of the imput has to be
 Note: ****Do not copy the function above, it is just a layout on how to structure a calling function.***
 
 To intialize the `TestContract.sol` contract copy the code below:
-```olidity
+```solidity
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-
 import './Person.sol';
 
-contract TestContract{
+contract TestContract {
 
 }
+
 ```
 Note: ***You'll need to import the `Person.sol` contract to make reference to the functions in the `Person.sol` contract you'll be calling***.
 
-* The first function `callGetDetails` accepts the address of the deployed `Person.sol` contract  as `_test` and the other arguments `_name`, `_age` to pass to the `getDetails` function in the `Person.sol` contract.  
+* The first function `callGetDetails` accepts the address of the deployed `Person.sol` contract  as `_test` and the other arguments `_name`, `_age` to pass to the `getDetails` function in the `Person.sol` contract.
 
 Copy and add the function below to the contract:
 
@@ -196,24 +232,84 @@ Copy and add the function below to the contract:
     
 ```
 
-* The second function `callSayDetails` will call the `SayDetails` function in the `Person.sol` contract
+* The second function `callSayDetails` will be an external view function that takes the deployed `Person.sol` contract address as `_test`. And returns the `name` & `age` variables in the `SayDetails` function from the `Person.sol` contract.
 
 Copy and add the function below to the contract:
 
 ```solidity
 
+    function callSayDetails(address _test) external view returns (string memory, uint256) {
+        return Person(_test).sayDetails();
+    }
 
 ```
-After adding all the functions created above, your complete `StudentIntro.sol` contract should look exactly like the code below.
 
-For Uniformity, purposes copy and paste the entire code below into the `Person.sol` contract file
+* The third function `callpayFee` will call the `payFee` function in the `Person.sol` contract. The function is a payable function for sending ETH into the  smart contract.
 
+```solidity
+
+    function callpayFee(address _test) external payable {
+        paying(_test).payFee();
+    }
+    
+```
+The last function `callgetValue`will be call the `getValue` from the previous contract `Person.sol`. The function will simply return the same values that the `getValue` function returns.
+
+```solidity
+
+    function callgetValue(address _test) external view returns(uint256, uint256, bool) {
+        return paying(_test).getValue();
+    }
+    
+```
+
+Copy and add the code below:
+
+```solidity
+
+    function callgetValue(address _test) external view returns(uint256, uint256, bool) {
+        return paying(_test).getValue();
+    }
+
+```
+
+After adding all the functions created above, your complete `TestContract.sol` contract should look exactly like the code below.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+
+import './Person.sol';
+import './PayingContract.sol';
+
+contract TestContract{
+    function callGetDetails(address _test, string memory _name, uint256 _age) external {
+        Person(_test).getDetails(_name, _age);
+    } 
+
+    function callSayDetails(address _test) external view returns (string memory, uint256) {
+        return Person(_test).sayDetails();
+    }
+
+    function callpayFee(address _test) external payable {
+        paying(_test).payFee();
+    }
+
+    function callgetValue(address _test) external view returns(uint256, uint256, bool) {
+        return paying(_test).getValue();
+    }
+}
+
+```
+
+Next you'll be deploying the contracts you'e created on the Celo Blockchain.
 
 ## Deploying to Celo Alfajores
-Hopefully, you should be familiar with deploying a contract on the Celo blockchain. If not Here is a quick guide on how to deploy to the Celo Blockchain.
+Hopefully, you should be familiar with deploying a contract on the Celo blockchain. If not, here is a quick guide on how to deploy to the Celo Blockchain.
 In the next few steps, you will deploy both of the previously created contracts to the Celo blockchain, to begin making the contract calls.
 
-
+1. 
 ## Creating a proficient test script
 
 
