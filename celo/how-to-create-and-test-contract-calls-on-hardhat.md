@@ -59,7 +59,7 @@ The calls can be made to retireve data from a query function , or to a payable f
 
 Now that you've been reminded of the tools we'll be needing, it's time to get your hands dirty with writing code to understand the purpose of this tutorial.
 
-## Installing Hardhat
+## Installing Setting up Hardhat
 To get started with the coding part o this tutorial, you need to install Hardhat.
 In the next couple of steps, you will learn how to install Hardhat into your local work environment using yarn on you're preferred Package Manager  
 
@@ -67,7 +67,7 @@ In the next couple of steps, you will learn how to install Hardhat into your loc
 
 2. Go to the terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
 
-3. Run the command  `npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers` on your terminal to install all the required dependencies you'lll need for this tutorial
+3. Run the command  `npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`. also run the command `npm i hardhat-deploy` on your terminal to install all the required dependencies you'lll need for this tutorial
 
 4. Next run the command `npx hardhat` to fire up your hardhat development environment. You will be prompted to choose the language you'll be working with.
 
