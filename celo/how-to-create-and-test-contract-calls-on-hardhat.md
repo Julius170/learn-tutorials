@@ -292,23 +292,23 @@ contract TestContract{
     }
 
     function callpayFee(address _test) external payable {
-        paying(_test).payFee();
+        Person(_test).payFee();
     }
 
     function callgetValue(address _test) external view returns(uint256, uint256, bool) {
-        return paying(_test).getValue();
+        return Person(_test).getValue();
     }
 }
 
 ```
 
-Next you'll be deploying the contracts you'e created on the Celo Blockchain.
+Next you'll be deploying the contracts you've created to the Celo Blockchain.
 
 ## Deploying to Celo Alfajores
 Hopefully, you should be familiar with deploying a contract on the Celo blockchain. If not, here is a quick guide on how to deploy to the Celo Blockchain.
 In the next few steps, you will deploy both of the previously created contracts to the Celo blockchain, to begin making the contract calls.
 
-1. 
+1. To Compile the Contracts run the the command `npm hardhat compile ` on your teminal.   
 ## Creating a proficient test script
 
 
