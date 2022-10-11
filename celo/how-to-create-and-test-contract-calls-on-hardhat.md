@@ -37,7 +37,14 @@ It functions exactly as effectively as on the Celo mainnets, except you call tra
 ## Faucets
 Faucets are simply fake money funded into your wallet only to interact with a testNet **fake Blockchain**.
 To make transactions on the Alfajores TestNet you need faucets in Celo USD **CUSD**.
-Following this tutorial, you will need **CUSD** faucets to deploy and make transactions on the celo Alfajores blockchain   
+
+Following this tutorial, you will need **CUSD** faucets to deploy and make transactions on the Celo Alfajores blockchain.
+Getting faucets is always as easy as taking these few baby steps:
+1. Head over to the [faucet](https://link-url-here.org) site for the testnet you need. For example a Celo Alfajor faucet will give you fake money to interact with the Celo Alfajore testnet.  
+
+2. Copy your wallet address from metamask or your prefered wallet and paste it into the tab.
+
+3. complete the authentication process, usually `i am not a robot`. Click the und button and wait for about 15 to 90 seconds depanding on the requesting network and you'll notice an increase in your wallet balance. 
 
 
 ## HardHat
@@ -92,9 +99,9 @@ contract Person {
     
 }
 ```
-Inside the contract `Person.sol` you will create will the following simple functions:
+Inside the `Person.sol` contract you will create the following simple functions:
 * The first function will be an external function `getDetails` that modifies the public variables `name`, and `age`. The function will accept a person's details as inputs and assign them to the public variables.
-Add the `getDetails` function to the `Person.sol` contract created earlier.
+Add the `getDetails` function below to the `Person.sol` contract created earlier.
 
 ```solidity
 
@@ -105,7 +112,7 @@ Add the `getDetails` function to the `Person.sol` contract created earlier.
         
 ```
 
-* The next function `sayDetails` will also be an external view function that simply returns the most recent pereson's details stored in the `getDetails` function.
+* The second function `sayDetails` will also be an external view function that simply returns the most recent pereson's details stored in the `getDetails` function.
  
 Copy and add the code below into the `Person.sol` Contract as the next function.
 
@@ -116,9 +123,9 @@ Copy and add the code below into the `Person.sol` Contract as the next function.
 
 ```
 
-* The third function `payFee` will be an external payable function that transfers money into the contract to simulate a student making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
+* The third function `payFee` will be an external payable function that transfers money into the contract to simulate a person making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`.
 
-Copy and add the code below to the `StudentIntro.sol` contract.
+Copy and add the functiton below into the `Person.sol` contract.
 
 ```solidity
 
@@ -129,7 +136,8 @@ Copy and add the code below to the `StudentIntro.sol` contract.
     
 ```
 
-the fourth contract will be 
+* The last contract is an external view function that returns multiple variables `value`, `contract_balance`, `has_payed` based on the payment function `payFee` being called earlier.
+ 
 ```solidity
 
     function getValue() external view returns(uint256, uint256, bool) {
@@ -138,25 +146,57 @@ the fourth contract will be
     
 ```
 
+The four functions created are sample functions to copy a real scenario of calling different types of functions from a contract.
 
-The four functions created are sample functions to copy a real scenario of calling different types of functions from a contract  
+
 Note: ***Alternatively, When creating contract calls you can also use the keyword `Interface` to initialize the calling contract. To know more about the interface Keyword and other Basic Solidity Data Types click here***. 
 
 
 ### The Caller Contract **`TestContract`**:
 
-The second contract is the caller function `TestContract.sol` will be the testing contract that will make the contract calls to the  `StudentIntro.sol` contract.
-The contract will also have three different functions to call the three different functions from the first contract `StudentIntro.sol`.
+The second contract `TestContract.sol` will be the testing contract that will make the contract calls to the `Person.sol` contract.
+The contract will also have four different functions to call the four different functions from the first contract `Person.sol`.
 
-Note: ***When creating a contract calling function the first input in the function will be the deployed contract address of the calling contract. followed by the name of the function in the contract you want to call***.  
-* The first function will be calling call the function `Studentdetails` from the `StudentIntro` contract.  
+When you wnat to call contracts from other contracts, one of the imput has to be the address of the contract you are calling to. and following the format below:
+
 
 ```solidity
-function callStudentIntro(address contractAddress) {
-    return (name, bool, value)
+    
+    function <function_name> <(functoin_inputs)> <visibility> <mutability> returns(output_datatype) {
+        do something
+        return something
+}
+
+```
+Note: ****Do not copy the function above, it is just a layout on how to structure a calling function.***
+
+To intialize the `TestContract.sol` contract copy the code below:
+```olidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+
+import './Person.sol';
+
+contract TestContract{
+
 }
 ```
+Note: ***You'll need to import the `Person.sol` contract to make reference to the functions in the `Person.sol` contract you'll be calling***.
 
+* The first function `callGetDetails` accepts the address of the deployed `Person.sol` contract  as `_test` and the other arguments `_name`, `_age` to pass to the `getDetails` function in the `Person.sol` contract.  
+
+Copy and add the function below to the contract:
+
+```solidity
+
+    function callGetDetails(address _test, string memory _name, uint256 _age) external {
+        Person(_test).getDetails(_name, _age);
+    } 
+    
+```
+
+* The second function `callSayDetails` will call the `SayDetails` function in the `Person.sol` contract  
 After adding all the functions created above, your complete `StudentIntro.sol` contract should look exactly like the code below.
 
 For Uniformity, purposes copy and paste the entire code below into the `StudentIntro.sol` contract file
