@@ -116,23 +116,34 @@ Copy and add the code below into the `Person.sol` Contract as the next function.
 
 ```
 
-* The last function `payFee` will be an external payable function that transfers money into the contract to simulate a student making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
+* The third function `payFee` will be an external payable function that transfers money into the contract to simulate a student making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`, and finally returns a string format that shows the information of the payment made.
 
 Copy and add the code below to the `StudentIntro.sol` contract.
 
 ```solidity
-    function payFee() external payable returns(string memory, bool, string memory, uint256) {
-        uint256 value = msg.value;
-        has_payed = true;
 
-        return ("'%b' : '%i' was payed by '%s'", has_payed, name, value);
-        }
+    function payFee() external payable {
+        value = msg.value;
+        has_payed = true;
+    }
+    
 ```
-The three functions created are sample functions to copy a real scenario of calling different types of functions from a contract  
+
+the fourth contract will be 
+```solidity
+
+    function getValue() external view returns(uint256, uint256, bool) {
+        return (value, address(this).balance, has_payed);
+    }
+    
+```
+
+
+The four functions created are sample functions to copy a real scenario of calling different types of functions from a contract  
 Note: ***Alternatively, When creating contract calls you can also use the keyword `Interface` to initialize the calling contract. To know more about the interface Keyword and other Basic Solidity Data Types click here***. 
 
 
-### The Caller Contract ***TestContract.sol***:
+### The Caller Contract **`TestContract`**:
 
 The second contract is the caller function `TestContract.sol` will be the testing contract that will make the contract calls to the  `StudentIntro.sol` contract.
 The contract will also have three different functions to call the three different functions from the first contract `StudentIntro.sol`.
