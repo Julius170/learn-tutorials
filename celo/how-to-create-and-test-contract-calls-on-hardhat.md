@@ -196,10 +196,17 @@ Copy and add the function below to the contract:
     
 ```
 
-* The second function `callSayDetails` will call the `SayDetails` function in the `Person.sol` contract  
+* The second function `callSayDetails` will call the `SayDetails` function in the `Person.sol` contract
+
+Copy and add the function below to the contract:
+
+```solidity
+
+
+```
 After adding all the functions created above, your complete `StudentIntro.sol` contract should look exactly like the code below.
 
-For Uniformity, purposes copy and paste the entire code below into the `StudentIntro.sol` contract file
+For Uniformity, purposes copy and paste the entire code below into the `Person.sol` contract file
 
 
 ## Deploying to Celo Alfajores
