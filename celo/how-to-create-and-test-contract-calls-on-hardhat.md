@@ -401,6 +401,8 @@ Note:
 
 * To begin, Run the code `const Person = await ethers.getContractFactory(Person")`, to simply get the deployed contract factory.
 
+A successful transaction should look like the image below:
+
 * Next, run the command `const person = await Person.attach("<Person.sol_contract_address>")`, to gain access to the contract on the blockchain.
 
 Now, to call the functions in the `Person.sol` contract:
@@ -421,6 +423,33 @@ A successful transaction should look like the image below:
 * Run the command `await person.getvalue()`.  
 A successful transaction should look like the image below:
 
-2. Now that you know how the functions work in the `Person.sol` contract, Now it's time to try calling the same function from another deployed contract `TestContract.sol`. 
+2. Now that you know what the functions in the `Person.sol` contract does, Now it's time to try calling the same function from another deployed contract `TestContract.sol`.
 
-*
+* To begin, Run the code `const TestContract = await ethers.getContractFactory(TestContract")`, to simply get the deployed contract factory.
+
+* Next, run the command `const test = await TestContract.attach("<TestContract.sol_contract_address>")`, to gain access to the contract on the blockchain:
+
+A successful transaction should look like the image below:
+
+Note: ***This is where you'll need the contract address of the `Person.sol` You will need to pass address as the first argument to all the function calls***
+
+***assuming deployed `Person.sol` contract address is: 0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1***
+
+* Run the command `await test.callGetDetails("0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1", "Julia", 25)`
+A successful transaction should look like the image below:
+
+* Run the command `await test.callSayDetails("0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1")`
+A successful transaction should look like the image below:
+
+* Run the command `await test.callpayFee("0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1")`
+A successful transaction should look like the image below:
+
+
+* Run the command `await test.callgetValue("0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1")`
+A successful transaction should look like the image below:
+
+# Conclusion
+Finálè, you complete and learned quite a lot of new things here, 
+You created two smart contracts, one will calling functions and the other to make contracts calls across the blockchain, You deployed both contracs to the Celo Blockchain successuflly. You also interactes with the deployed contract using the Hardhat Console and you made a number of contract calls on the celo blockchian.
+
+***Congraulations on taking another big step into the web3 rabbit hole***.
