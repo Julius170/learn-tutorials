@@ -308,8 +308,82 @@ Next you'll be deploying the contracts you've created to the Celo Blockchain.
 Hopefully, you should be familiar with deploying a contract on the Celo blockchain. If not, here is a quick guide on how to deploy to the Celo Blockchain.
 In the next few steps, you will deploy both of the previously created contracts to the Celo blockchain, to begin making the contract calls.
 
-1. To Compile the Contracts run the the command `npm hardhat compile ` on your teminal.   
-## Creating a proficient test script
+1. To Compile the Contracts run the the command `npm hardhat compile` on your teminal.
+2. Head over to the deploy folder and replace the `Lock.js` deploy script there with another two deploy scripts. Rename the files with `deploy_TestContract.js`and `deploy_PersonContract.js`.
+3. Copy and paste the code below into the `deploy_PersonContract.js` file:
+```javascript
+const hre = require("hardhat");
+
+const main = async () => {
+  const PersonContract = await hre.ethers.getContractFactory("Person");
+  const Person = await PersonContract.deploy();
+
+  await Person.deployed();
+
+  console.log("The Person contract was deployed to: ", Person.address);
+};
+
+const runMain = async () => {
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+};
+
+runMain();
 
 
+```
+
+5. Copy and Paste the code below into the `deploy_TestContract.js` file:
+```JavaScript 
+const hre = require("hardhat");
+
+const main = async () => {
+  const TestContract = await hre.ethers.getContractFactory("TestContract");
+  const TestingContractCalls = await TestContract.deploy();
+  
+  await TestingContractCalls.deployed();
+
+  console.log(
+    "The TestContractCall contract was deployed to: ",
+    TestingContractCalls.address
+  );
+}
+
+const runMain = async () => {
+  try {
+    await main();
+    process.exit(0);
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
+runMain();
+```
+7. Next, head over to the `hardhat.confog.js` file in the root folder and replace the hardhat config. code there with the Celo configuration code here.
+8. Replace the solidity version specified at the buttom of the `hardhat.config.js` file with the same version of solidity specified in you contracts.
+9. Run the command `npm i dotenv` to download the `dotenv` dependency, and create a new file in the root folder `.env`.
+10. Create a variable name `MNEMONIC` inside the dotenv file and add your intended wallet **MNEMONICs** as the value.
+
+Note: ***Your Wallet's MNEMONICs  is simple the recovery phrase used in creating your wallet. Still not clear on what your MNEMONICs is? Here's a quick read. 
+Make sure to verify that thae `.env` file is added to your `.gitignore` file if you'll be pushing to any version contral***.
+11. Finally, run the Following Command to deploy the two contracts:
+* Run the command `npx hardhat run scripts/deploy_PersonContract.js --network alfajores` to deploy the `Person.sol` contract.
+Note: ***Make sure to copy the contract address printed on the console, You'll need it while making the contract calls***.
+* Run the command `npx hardhat run scripts/deploy_TestContract.js --network alfajore` to deploy the `TestContract.sol` contract.
+Note: ***Make sure to copy the contract address printed on the console, You'll need it making the contract calls***.
+
+***And Voila Contracts Deployed...🥂📝***
+ 
 ## Making Contract Calls
+
+You'll be making use of the built-in hardhat too **Hardhat Console** to interack with the contracts on the blockchian and making those contract calls.
+* Run the command `npx hardhat console --network alfajores` to activate the hardhat console.
+
+
