@@ -309,7 +309,9 @@ Hopefully, you should be familiar with deploying a contract on the Celo blockcha
 In the next few steps, you will deploy both of the previously created contracts to the Celo blockchain, to begin making the contract calls.
 
 1. To Compile the Contracts run the the command `npm hardhat compile` on your teminal.
+
 2. Head over to the deploy folder and replace the `Lock.js` deploy script there with another two deploy scripts. Rename the files with `deploy_TestContract.js`and `deploy_PersonContract.js`.
+
 3. Copy and paste the code below into the `deploy_PersonContract.js` file:
 ```javascript
 const hre = require("hardhat");
@@ -334,8 +336,6 @@ const runMain = async () => {
 };
 
 runMain();
-
-
 ```
 
 5. Copy and Paste the code below into the `deploy_TestContract.js` file:
@@ -366,24 +366,61 @@ const runMain = async () => {
 
 runMain();
 ```
+
 7. Next, head over to the `hardhat.confog.js` file in the root folder and replace the hardhat config. code there with the Celo configuration code here.
+
 8. Replace the solidity version specified at the buttom of the `hardhat.config.js` file with the same version of solidity specified in you contracts.
+
 9. Run the command `npm i dotenv` to download the `dotenv` dependency, and create a new file in the root folder `.env`.
+
 10. Create a variable name `MNEMONIC` inside the dotenv file and add your intended wallet **MNEMONICs** as the value.
 
 Note: ***Your Wallet's MNEMONICs  is simple the recovery phrase used in creating your wallet. Still not clear on what your MNEMONICs is? Here's a quick read. 
 Make sure to verify that thae `.env` file is added to your `.gitignore` file if you'll be pushing to any version contral***.
+
 11. Finally, run the Following Command to deploy the two contracts:
+
 * Run the command `npx hardhat run scripts/deploy_PersonContract.js --network alfajores` to deploy the `Person.sol` contract.
+
 Note: ***Make sure to copy the contract address printed on the console, You'll need it while making the contract calls***.
+
 * Run the command `npx hardhat run scripts/deploy_TestContract.js --network alfajore` to deploy the `TestContract.sol` contract.
+
 Note: ***Make sure to copy the contract address printed on the console, You'll need it making the contract calls***.
 
-***And Voila Contracts Deployed...🥂📝***
+***And Voila, Contracts Deployed...🥂📝***
  
 ## Making Contract Calls
+Now its time to make those contract calls. 
+You'll be making use of the built-in hardhat tool **Hardhat Console** to interact with the contracts on the blockchian and making the contract calls.
+* Run the command `npx hardhat console --network alfajores` to activate the hardhat console. You'll notice a prompt arrow appears `>`.
 
-You'll be making use of the built-in hardhat too **Hardhat Console** to interack with the contracts on the blockchian and making those contract calls.
-* Run the command `npx hardhat console --network alfajores` to activate the hardhat console.
+Note: 
+
+1. Firstly, you'll have to test the functions in the `Person.sol` contract by calling the function.
+
+* To begin, Run the code `const Person = await ethers.getContractFactory(Person")`, to simply get the deployed contract factory.
+
+* Next, run the command `const person = await Person.attach("<Person.sol_contract_address>")`, to gain access to the contract on the blockchain.
+
+Now, to call the functions in the `Person.sol` contract:
+
+* Run the command `await person.sayDetails()`, returns empty variables `name` and `age`.
+A successful transaction should look like the image below:
+
+* Run the command `await person.getDetails("Albert", 22)`.
+A successful transaction should look like the image below:
 
 
+Rerun the first command `await person.sayDetails()`, this should return the name and the values input you sent in previously. `Albert` and 22:
+A successful transaction should look like the image below:
+
+* Run the command `await person.payFee()`.
+A successful transaction should look like the image below:
+
+* Run the command `await person.getvalue()`.  
+A successful transaction should look like the image below:
+
+2. Now that you know how the functions work in the `Person.sol` contract, Now it's time to try calling the same function from another deployed contract `TestContract.sol`. 
+
+*
