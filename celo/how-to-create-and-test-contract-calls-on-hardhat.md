@@ -1,10 +1,10 @@
-# How to Create and test contract calls on HardHat 
+s on HardHat 
 
 # Introduction
 One of the most essential and helpful tools a blockchain developer has as an arsenal is making contract calls. When working on complex and multi-contract projects it is very likely, that you won't be deploying a single smart contract file for the whole production. You might even deploy some contracts earlier than others.
 
 Making contract calls is a flexible way for deployed contracts to interact with other deployed contracts on the blockchain.
-This way rather than having a messy long line of code, you have a network of contracts interacting with each other on the blockchian.
+This way rather than having a messy long line of code, you have a network of contracts interacting with each other on the blockchain.
 
 
 Throughout this tutorial you will learn how to:
@@ -22,7 +22,7 @@ To get the best out of this tutorial, you should have a basic  and foundational 
 * Faucets 
 * Hardhat, Don't worry, you will be installing hardhat alongside this tutorial 
 * Node `node` and Node Package Manager `npm`. This tutorial will make use of the node package manager.
-You should have the node package manager `npm` pre-installed. Follow the links more information on installing `node` and node package manager `npm`.
+You should have the node package manager `npm` pre-installed. Follow the links for more information on installing `node` and node package manager `npm`.
 
 
 
@@ -40,21 +40,21 @@ To make transactions on the Alfajores TestNet you need faucets in Celo USD **CUS
 
 Following this tutorial, you will need **CUSD** faucets to deploy and make transactions on the Celo Alfajores blockchain.
 Getting faucets is always as easy as taking these few baby steps:
-1. Head over to the [faucet](https://link-url-here.org) site for the testnet you need. For example a Celo Alfajor faucet will give you fake money to interact with the Celo Alfajore testnet.  
+1. Head over to the [faucet](https://link-url-here.org) site for the testnet you need. For example, a Celo Alfajor faucet will give you fake money to interact with the Celo Alfajore testnet.  
 
-2. Copy your wallet address from metamask or your prefered wallet and paste it into the tab.
+2. Copy your wallet address from metamask or your preferred wallet and paste it into the tab.
 
-3. complete the authentication process, usually `i am not a robot`. Click the und button and wait for about 15 to 90 seconds depanding on the requesting network and you'll notice an increase in your wallet balance. 
+3. complete the authentication process, usually ***i am not a robot***. Click the und button and wait for about 15 to 90 seconds depending on the requesting network and you'll notice an increase in your wallet balance. 
 
 
 ## HardHat
-Hardhat is an Ethereum Development Environment that runs on `ether-js` and `solc-js` and other basic EVM compatible libraries. It is used for compiling, running, and deploying solidity smart contracts
+Hardhat is an Ethereum Development Environment that runs on `ether-js` and `solc-js` and other basic EVM-compatible libraries. It is used for compiling, running, and deploying solidity smart contracts
 
 
 ## Calling Contracts 
 What are the contract calls referred to in this tutorial?
 Making a contract call simply means calling the functions from a deployed contract into another deployed contract on the blockchain.
-The calls can be made to retireve data from a query function , or to a payable function for making payment, or even a modifier function for modifying a variable state
+The calls can be made to retrieve data from a query function, to a payable function for making payment, or even a modifier function for modifying a variable state
 
 
 Now that you've been reminded of the tools we'll be needing, it's time to get your hands dirty with writing code to understand the purpose of this tutorial.
@@ -67,7 +67,7 @@ In the next couple of steps, you will learn how to install Hardhat into your loc
 
 2. Go to the terminal of your work environment and run the code `npm init -y`. This is to initialize a `package.json` file 
 
-3. Run the command  `npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`. also run the command `npm i hardhat-deploy` on your terminal to install all the required dependencies you'lll need for this tutorial
+3. Run the command  `npm install --save-dev hardhat @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers`. also, run the command `npm i hardhat-deploy` on your terminal to install all the required dependencies you'll need for this tutorial
 
 4. Next run the command `npx hardhat` to fire up your hardhat development environment. You will be prompted to choose the language you'll be working with.
 
@@ -112,7 +112,7 @@ Add the `getDetails` function below to the `Person.sol` contract created earlier
         
 ```
 
-* The second function `sayDetails` will also be an external view function that simply returns the most recent pereson's details stored in the `getDetails` function.
+* The second function `sayDetails` will also be an external view function that simply returns the most recent person's details stored in the `getDetails` function.
  
 Copy and add the code below into the `Person.sol` Contract as the next function.
 
@@ -125,7 +125,7 @@ Copy and add the code below into the `Person.sol` Contract as the next function.
 
 * The third function `payFee` will be an external payable function that transfers money into the contract to simulate a person making a payment, the function assigns the bool variable `is_payed` to `true` and the variable paid amount `amount` to `msg.value`.
 
-Copy and add the functiton below into the `Person.sol` contract.
+Copy and add the function below into the `Person.sol` contract.
 
 ```solidity
 
@@ -192,7 +192,7 @@ contract Person {
 The second contract `TestContract.sol` will be the testing contract that will make the contract calls to the `Person.sol` contract.
 The contract will also have four different functions to call the four different functions from the first contract `Person.sol`.
 
-When you wnat to call contracts from other contracts, one of the imput has to be the address of the contract you are calling to. and following the format below:
+When you want to call contracts from other contracts, one of the inputs has to be the address of the contract you are calling to. and following the format below:
 
 
 ```solidity
@@ -205,7 +205,7 @@ When you wnat to call contracts from other contracts, one of the imput has to be
 ```
 Note: ****Do not copy the function above, it is just a layout on how to structure a calling function.***
 
-To intialize the `TestContract.sol` contract copy the code below:
+To initialize the `TestContract.sol` contract copy the code below:
 ```solidity
 
 // SPDX-License-Identifier: MIT
@@ -218,7 +218,7 @@ contract TestContract {
 }
 
 ```
-Note: ***You'll need to import the `Person.sol` contract to make reference to the functions in the `Person.sol` contract you'll be calling***.
+Note: ***You'll need to import the `Person.sol` contract to refer to the functions in the `Person.sol` contract you'll be calling***.
 
 * The first function `callGetDetails` accepts the address of the deployed `Person.sol` contract  as `_test` and the other arguments `_name`, `_age` to pass to the `getDetails` function in the `Person.sol` contract.
 
@@ -244,7 +244,7 @@ Copy and add the function below to the contract:
 
 ```
 
-* The third function `callpayFee` will call the `payFee` function in the `Person.sol` contract. The function is a payable function for sending ETH into the  smart contract.
+* The third function `callpayFee` will call the `payFee` function in the `Person.sol` contract. The function is a payable function for sending ETH into the smart contract.
 
 ```solidity
 
@@ -253,7 +253,7 @@ Copy and add the function below to the contract:
     }
     
 ```
-The last function `callgetValue`will be call the `getValue` from the previous contract `Person.sol`. The function will simply return the same values that the `getValue` function returns.
+The last function `callgetValue`will be called the `getValue` from the previous contract `Person.sol`. The function will simply return the same values that the `getValue` function returns.
 
 ```solidity
 
@@ -302,15 +302,15 @@ contract TestContract{
 
 ```
 
-Next you'll be deploying the contracts you've created to the Celo Blockchain.
+Next, you'll be deploying the contracts you've created to the Celo Blockchain.
 
 ## Deploying to Celo Alfajores
 Hopefully, you should be familiar with deploying a contract on the Celo blockchain. If not, here is a quick guide on how to deploy to the Celo Blockchain.
 In the next few steps, you will deploy both of the previously created contracts to the Celo blockchain, to begin making the contract calls.
 
-1. To Compile the Contracts run the the command `npm hardhat compile` on your teminal.
+1. To Compile the Contracts run the command `npm hardhat compile` on your terminal.
 
-2. Head over to the deploy folder and replace the `Lock.js` deploy script there with another two deploy scripts. Rename the files with `deploy_TestContract.js`and `deploy_PersonContract.js`.
+2. Head over to the deploy folder and replace the `Lock.js` deploy script there with another two deploy scripts. Rename the files with `deploy_TestContract.js` and `deploy_PersonContract.js`.
 
 3. Copy and paste the code below into the `deploy_PersonContract.js` file:
 ```javascript
@@ -369,14 +369,14 @@ runMain();
 
 7. Next, head over to the `hardhat.confog.js` file in the root folder and replace the hardhat config. code there with the Celo configuration code here.
 
-8. Replace the solidity version specified at the buttom of the `hardhat.config.js` file with the same version of solidity specified in you contracts.
+8. Replace the solidity version specified at the bottom of the `hardhat.config.js` file with the same version of solidity specified in your contracts.
 
 9. Run the command `npm i dotenv` to download the `dotenv` dependency, and create a new file in the root folder `.env`.
 
 10. Create a variable name `MNEMONIC` inside the dotenv file and add your intended wallet **MNEMONICs** as the value.
 
-Note: ***Your Wallet's MNEMONICs  is simple the recovery phrase used in creating your wallet. Still not clear on what your MNEMONICs is? Here's a quick read. 
-Make sure to verify that thae `.env` file is added to your `.gitignore` file if you'll be pushing to any version contral***.
+Note: ***Your Wallet's MNEMONICs is simple the recovery phrase used in creating your wallet. Still not clear on what your MNEMONICs are? Here's a quick read. 
+Make sure to verify that the `.env` file is added to your `.gitignore` file if you'll be pushing to any version control***.
 
 11. Finally, run the Following Command to deploy the two contracts:
 
@@ -391,8 +391,8 @@ Note: ***Make sure to copy the contract address printed on the console, You'll n
 ***And Voila, Contracts Deployed...🥂📝***
  
 ## Making Contract Calls
-Now its time to make those contract calls. 
-You'll be making use of the built-in hardhat tool **Hardhat Console** to interact with the contracts on the blockchian and making the contract calls.
+Now it's time to make those contract calls. 
+You'll be making use of the built-in hardhat tool **Hardhat Console** to interact with the contracts on the blockchain and make the contract calls.
 * Run the command `npx hardhat console --network alfajores` to activate the hardhat console. You'll notice a prompt arrow appears `>`.
 
 Note: 
@@ -431,9 +431,9 @@ A successful transaction should look like the image below:
 
 A successful transaction should look like the image below:
 
-Note: ***This is where you'll need the contract address of the `Person.sol` You will need to pass address as the first argument to all the function calls***
+Note: ***This is where you'll need the contract address of the `Person.sol` You will need to pass the address as the first argument to all the function calls***
 
-***assuming deployed `Person.sol` contract address is: 0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1***
+***assuming the deployed `Person.sol` contract address is: 0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1***
 
 * Run the command `await test.callGetDetails("0xA019Ad7Ed1F3fc0276E0854F2fF022EFeFf5C8e1", "Julia", 25)`
 A successful transaction should look like the image below:
@@ -450,6 +450,6 @@ A successful transaction should look like the image below:
 
 # Conclusion
 Finálè, you complete and learned quite a lot of new things here, 
-You created two smart contracts, one will calling functions and the other to make contracts calls across the blockchain, You deployed both contracs to the Celo Blockchain successuflly. You also interactes with the deployed contract using the Hardhat Console and you made a number of contract calls on the celo blockchian.
+You created two smart contracts, one will call functions and the other to make contract calls across the blockchain, You deployed both contracts to the Celo Blockchain successfully. You also interact with the deployed contract using the Hardhat Console and you made several contract calls on the celo blockchain.
 
-***Congraulations on taking another big step into the web3 rabbit hole***.
+***Congratulations on taking another big step into the web3 rabbit hole***.
